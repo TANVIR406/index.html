@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Get a Free Key | Unknown Modz</title>
     <style>
         :root { 
@@ -31,6 +31,7 @@
             justify-content: center; 
             align-items: center; 
             min-height: 100vh; 
+            min-height: -webkit-fill-available; /* মোবাইলের অ্যাড্রেস বারের সমস্যা দূর করার জন্য */
             padding: 20px;
         }
 
@@ -39,6 +40,7 @@
             max-width: 440px; 
             text-align: center; 
             animation: fadeIn 0.6s ease-out;
+            margin: auto; /* কন্টেন্ট সবসময় মাঝখানে রাখার জন্য */
         }
 
         @keyframes fadeIn {
@@ -104,6 +106,7 @@
             font-size: 13px; 
             font-weight: 500;
             color: var(--text-muted); 
+            flex-shrink: 0; /* টেক্সট যেন ভেঙে না যায় */
         }
         
         .circle { 
@@ -136,7 +139,7 @@
         }
 
         .progress-bar-fill {
-            width: 100%; /* Change based on steps */
+            width: 100%; 
             height: 100%;
             background: var(--accent);
         }
@@ -150,6 +153,13 @@
             text-align: left; 
             box-shadow: 0 20px 40px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.05); 
             position: relative;
+        }
+
+        /* ছোট মোবাইলের জন্য প্যাডিং অ্যাডজাস্টমেন্ট */
+        @media (max-width: 380px) {
+            .card {
+                padding: 20px;
+            }
         }
 
         .card::before {
@@ -195,7 +205,7 @@
         }
         
         .warning-text { 
-            color: #d1a153; /* High contrast readable yellow-brown */
+            color: #d1a153; 
             font-size: 12px; 
             line-height: 1.4;
         }
@@ -235,6 +245,7 @@
 
 <div class="container">
     <div class="key-icon">
+        <!-- ইমেজ লোড না হলেও অল্টারনেটিভ টেক্সট সুন্দর দেখাবে -->
         <img src="./assets/logo.png" alt="UKM">
     </div>
     <h1>Get a Free Key</h1>
