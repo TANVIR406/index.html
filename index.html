@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Key Generated | Unknown Modz</title>
     <style>
         :root { 
@@ -31,6 +31,7 @@
             justify-content: center; 
             align-items: center; 
             min-height: 100vh; 
+            min-height: -webkit-fill-available; /* মোবাইলের অ্যাড্রেস বার ফিক্স */
             padding: 20px;
         }
 
@@ -39,6 +40,7 @@
             max-width: 440px; 
             text-align: center;
             animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            margin: auto;
         }
 
         @keyframes fadeIn {
@@ -107,12 +109,15 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.05); 
         }
 
-        h2 { font-size: 18px; margin-bottom: 10px; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+        @media (max-width: 380px) {
+            .card, .error-card { padding: 24px 16px; }
+        }
+
+        h2 { font-size: 16px; margin-bottom: 10px; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
         .card-p { color: var(--text-muted); font-size: 14px; line-height: 1.6; margin-bottom: 25px; }
 
         /* --- CYBERPUNK KEY BOX --- */
-
-.key-box { 
+        .key-box { 
             background: #09090b; 
             padding: 20px; 
             border-radius: 14px; 
@@ -130,10 +135,11 @@
         #finalKey { 
             color: var(--accent); 
             font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; 
-            font-size: 18px; 
+            font-size: 16px; 
             font-weight: 700; 
-            letter-spacing: 1.5px; 
+            letter-spacing: 1px; 
             text-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
+            word-break: break-all; /* মোবাইল স্ক্রিনে কী যেন কেটে না যায় */
         }
         
         /* --- PREMIUM BUTTON ANIMATIONS --- */
@@ -193,7 +199,6 @@
 <body>
 
 <div class="container">
-    <!-- MAIN CONTAINER (SUCCESS) -->
     <div id="mainContainer">
         <div class="key-icon">
             <img src="./assets/logo.png" alt="UKM">
@@ -216,7 +221,6 @@
         </div>
     </div>
 
-    <!-- BYPASS CONTAINER (ERROR) -->
     <div id="bypassContainer">
         <div class="error-card">
             <div class="error-icon">🚫</div>
@@ -235,9 +239,9 @@
         const source = urlParams.get('source');
         const referrer = document.referrer;
         
-        if (source === "official"  referrer.includes("vplink.in")  referrer.includes("lootdest.org") || referrer.includes("steps.html")) {
-
-if (source === "official") {
+        // এখানে OR (||) অপারেটরগুলো ঠিক করা হয়েছে
+        if (source === "official" || referrer.includes("vplink.in") || referrer.includes("lootdest.org") || referrer.includes("steps.html")) {
+            if (source === "official") {
                 const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
                 window.history.replaceState({}, document.title, cleanUrl);
             }
@@ -288,21 +292,49 @@ if (source === "official") {
 
     function copyKey() {
         const keyText = document.getElementById('finalKey').innerText;
-        if(keyText.includes("SECURE")  keyText.includes("CONNECT")  keyText.includes("DENIED")) return;
+        // এখানেও OR (||) অপারেটর ঠিক করা হয়েছে
+        if(keyText.includes("SECURE") || keyText.includes("CONNECT") || keyText.includes("DENIED")) return;
 
-        navigator.clipboard.writeText(keyText).then(() => {
-            const btn = document.getElementById('copyBtn');
-            btn.innerText = "COPIED SUCCESSFULLY! ✅";
-            btn.style.background = "var(--accent)";
-            btn.style.color = "#000";
-            btn.style.boxShadow = "0 0 20px rgba(0, 255, 136, 0.4)";
-            
-            setTimeout(() => { 
-                btn.innerText = "COPY TO CLIPBOARD"; 
-                btn.style.background = "#ffffff";
-                btn.style.boxShadow = "0 4px 12px rgba(255,255,255,0.1)";
-            }, 2000);
-        });
+        // পুরানো ব্রাউজার সাপোর্টসহ উন্নত কপি মেথড
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(keyText).then(() => {
+                showCopySuccess();
+            }).catch(() => {
+                fallbackCopy(keyText);
+            });
+        } else {
+            fallbackCopy(keyText);
+        }
+    }
+
+    function fallbackCopy(text) {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed"; 
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            showCopySuccess();
+        } catch (err) {
+            alert("Failed to copy key, please copy manually.");
+        }
+        document.body.removeChild(textArea);
+    }
+
+    function showCopySuccess() {
+        const btn = document.getElementById('copyBtn');
+        btn.innerText = "COPIED SUCCESSFULLY! ✅";
+        btn.style.background = "var(--accent)";
+        btn.style.color = "#000";
+        btn.style.boxShadow = "0 0 20px rgba(0, 255, 136, 0.4)";
+        
+        setTimeout(() => { 
+            btn.innerText = "COPY TO CLIPBOARD"; 
+            btn.style.background = "#ffffff";
+            btn.style.boxShadow = "0 4px 12px rgba(255,255,255,0.1)";
+        }, 2000);
     }
 
     window.onload = checkSecurity;
