@@ -2,71 +2,43 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get a Free Key | Unknown Modz</title>
     <style>
-        :root { 
-            --bg: #0a0a0c; 
-            --card: #131316; 
-            --text: #ffffff; 
-            --text-muted: #8f9099;
-            --accent: #3b82f6; /* Premium Electric Blue */
-            --accent-glow: rgba(59, 130, 246, 0.15);
-            --warning-bg: #1c150c; 
-            --warning-border: #443213; 
-            --warning-text: #f59e0b; 
-        }
+        :root { --bg: #000000; --card: #121212; --text: #ffffff; --accent: #ffffff; --warning-bg: #1a1505; --warning-border: #3d3002; --warning-text: #eec136; }
         
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
         body { 
             background-color: var(--bg); 
             color: var(--text); 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
             display: flex; 
             justify-content: center; 
             align-items: center; 
             min-height: 100vh; 
-            min-height: -webkit-fill-available; /* মোবাইলের অ্যাড্রেস বারের সমস্যা দূর করার জন্য */
+            margin: 0; 
             padding: 20px;
+            box-sizing: border-box;
         }
 
         .container { 
             width: 100%; 
-            max-width: 440px; 
+            max-width: 400px; 
             text-align: center; 
-            animation: fadeIn 0.6s ease-out;
-            margin: auto; /* কন্টেন্ট সবসময় মাঝখানে রাখার জন্য */
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- PREMIUM LOGO HOVER --- */
+        /* --- LOGO FIX FOR PC & MOBILE --- */
         .key-icon { 
-            background: #16161a; 
-            width: 90px; 
-            height: 90px; 
+            background: #1a1a1a; 
+            width: 80px; 
+            height: 80px; 
             border-radius: 50%; 
             display: flex; 
             justify-content: center; 
             align-items: center; 
-            margin: 0 auto 20px; 
-            border: 1px solid #2a2a32; 
+            margin: 0 auto 15px; 
+            border: 1px solid #333; 
             overflow: hidden;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-
-        .key-icon:hover {
-            transform: scale(1.05);
-            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(255,255,255,0.05);
         }
 
         .key-icon img {
@@ -75,177 +47,37 @@
             object-fit: cover; 
         }
 
-        h1 { 
-            font-size: 26px; 
-            font-weight: 700; 
-            margin-bottom: 8px; 
-            letter-spacing: -0.5px;
-        }
-        
-        .subtitle { 
-            color: var(--text-muted); 
-            font-size: 14px; 
-            margin-bottom: 30px; 
-        }
-        
-        /* --- MODERN PROGRESS TRACKER --- */
-        .progress-container { 
-            display: flex; 
-            align-items: center; 
-            background: #16161a;
-            padding: 12px 16px;
-            border-radius: 14px;
-            margin-bottom: 20px; 
-            border: 1px solid #22222a;
-        }
-        
-        .step-indicator { 
-            display: flex; 
-            align-items: center; 
-            gap: 10px; 
-            font-size: 13px; 
-            font-weight: 500;
-            color: var(--text-muted); 
-            flex-shrink: 0; /* টেক্সট যেন ভেঙে না যায় */
-        }
-        
-        .circle { 
-            width: 24px; 
-            height: 24px; 
-            border: 2px solid #33333f; 
-            border-radius: 50%; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            font-size: 11px; 
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-        
-        .circle.active { 
-            border-color: var(--accent); 
-            background: var(--accent);
-            color: #fff; 
-            box-shadow: 0 0 10px var(--accent-glow);
-        }
-        
-        .progress-bar-wrapper {
-            flex-grow: 1;
-            height: 4px;
-            background: #22222a;
-            margin-left: 15px;
-            border-radius: 2px;
-            overflow: hidden;
+        @media (min-width: 768px) {
+            .container { max-width: 480px; }
+            .key-icon { width: 110px; height: 110px; } 
         }
 
-        .progress-bar-fill {
-            width: 100%; 
-            height: 100%;
-            background: var(--accent);
-        }
-
-        /* --- PREMIUM CARD WITH GLOW --- */
-        .card { 
-            background: var(--card); 
-            border: 1px solid #22222a; 
-            border-radius: 24px; 
-            padding: 32px; 
-            text-align: left; 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.05); 
-            position: relative;
-        }
-
-        /* ছোট মোবাইলের জন্য প্যাডিং অ্যাডজাস্টমেন্ট */
-        @media (max-width: 380px) {
-            .card {
-                padding: 20px;
-            }
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: -1px; left: -1px; right: -1px; bottom: -1px;
-            border-radius: 24px;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.03), transparent);
-            pointer-events: none;
-        }
+        h1 { font-size: 28px; font-weight: bold; margin-bottom: 10px; }
+        .subtitle { color: #888; font-size: 14px; margin-bottom: 30px; }
         
-        h2 { font-size: 18px; font-weight: 600; margin-bottom: 12px; }
-        
-        .card-p { 
-            color: var(--text-muted); 
-            font-size: 14px; 
-            line-height: 1.6; 
-            margin-bottom: 24px; 
-        }
+        .progress-container { display: flex; align-items: center; justify-content: space-between; margin-bottom: 25px; }
+        .step-indicator { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #888; }
+        .circle { width: 22px; height: 22px; border: 2px solid #333; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 10px; }
+        .circle.active { border-color: var(--text); color: var(--text); }
+        .line { flex-grow: 1; height: 2px; background: #222; margin: 0 15px; }
 
-        /* --- WARNING BOX FIXED CONTRAST --- */
-        .warning { 
-            background: var(--warning-bg); 
-            border: 1px solid var(--warning-border); 
-            border-radius: 14px; 
-            padding: 16px; 
-            display: flex; 
-            gap: 12px; 
-            margin-bottom: 28px; 
-        }
-        
-        .warning-icon { 
-            color: var(--warning-text); 
-            font-size: 18px; 
-            line-height: 1;
-        }
-        
-        .warning-title { 
-            color: var(--warning-text); 
-            font-weight: 600; 
-            font-size: 13px; 
-            margin-bottom: 3px;
-        }
-        
-        .warning-text { 
-            color: #d1a153; 
-            font-size: 12px; 
-            line-height: 1.4;
-        }
+        .card { background: var(--card); border: 1px solid #222; border-radius: 24px; padding: 30px; text-align: left; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+        h2 { font-size: 20px; margin-bottom: 15px; }
+        .card-p { color: #888; font-size: 15px; line-height: 1.5; margin-bottom: 25px; }
 
-        /* --- PREMIUM BUTTON INTERACTION --- */
-        .btn { 
-            width: 100%; 
-            padding: 16px; 
-            background: var(--text); 
-            color: #000; 
-            border: none; 
-            border-radius: 14px; 
-            font-size: 15px; 
-            font-weight: 600; 
-            cursor: pointer; 
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 12px rgba(255,255,255,0.1);
-        }
-        
-        .btn:hover { 
-            transform: translateY(-2px); 
-            background: var(--accent);
-            color: #ffffff;
-            box-shadow: 0 8px 20px var(--accent-glow);
-        }
+        .warning { background: var(--warning-bg); border: 1px solid var(--warning-border); border-radius: 12px; padding: 15px; display: flex; gap: 12px; margin-bottom: 30px; }
+        .warning-icon { color: var(--warning-text); font-size: 18px; }
+        .warning-title { color: var(--warning-text); font-weight: bold; font-size: 14px; }
+        .warning-text { color: #8a701f; font-size: 12px; }
 
-        .btn:active {
-            transform: translateY(0);
-        }
+        .btn { width: 100%; padding: 16px; background: #ffffff; color: #000; border: none; border-radius: 14px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s ease; }
+        .btn:hover { transform: scale(1.02); background: #00ff88; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="key-icon">
-        <!-- ইমেজ লোড না হলেও অল্টারনেটিভ টেক্সট সুন্দর দেখাবে -->
         <img src="./assets/logo.png" alt="UKM">
     </div>
     <h1>Get a Free Key</h1>
@@ -256,9 +88,8 @@
             <div class="circle active">1</div>
             <span>Step 1 of 1</span>
         </div>
-        <div class="progress-bar-wrapper">
-            <div class="progress-bar-fill"></div>
-        </div>
+        <div class="line"></div>
+        <div class="circle" style="background: #111;"></div>
     </div>
 
     <div class="card">
@@ -266,7 +97,7 @@
         <p class="card-p">To continue, click the button below to complete the first step. You will be redirected and then return to this page once finished.</p>
 
         <div class="warning">
-            <span class="warning-icon">⚠️</span>
+            <div class="warning-icon">⚠️</div>
             <div>
                 <div class="warning-title">Security Notice</div>
                 <div class="warning-text">The use of bots or any kind of automation will result in your key being banned.</div>
@@ -274,7 +105,7 @@
         </div>
 
         <button class="btn" onclick="location.href='https://vplink.in/1Gtr'">
-            Continue to Step <span>➜</span>
+            Continue to Step ➜
         </button>
     </div>
 </div>
